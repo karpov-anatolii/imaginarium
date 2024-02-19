@@ -15,10 +15,10 @@ export async function createUser(user: CreateUserParams) {
 
     const newUser = await User.create(user);
 
-    console.log("newUser=", newUser);
-
     return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
+    console.log("createUser error=", error);
+
     handleError(error);
   }
 }
@@ -40,23 +40,12 @@ export async function getUserById(userId: string) {
 
 // UPDATE
 export async function updateUser(clerkId: string, user: UpdateUserParams) {
-  console.log(
-    "UpdateUser clerkId=",
-    clerkId,
-    " user=",
-    user,
-    " user JSON=",
-    JSON.stringify(user)
-  );
-
   try {
     await connectToDatabase();
 
     const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
       new: true,
     });
-
-    console.log("updatedUser=", updatedUser);
 
     if (!updatedUser) throw new Error("User update failed");
 
