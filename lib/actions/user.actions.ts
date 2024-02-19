@@ -8,10 +8,14 @@ import { handleError } from "../utils";
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
+  console.log("createUser user=", user, " user JSON=", JSON.stringify(user));
+
   try {
     await connectToDatabase();
 
     const newUser = await User.create(user);
+
+    console.log("newUser=", newUser);
 
     return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
@@ -36,12 +40,23 @@ export async function getUserById(userId: string) {
 
 // UPDATE
 export async function updateUser(clerkId: string, user: UpdateUserParams) {
+  console.log(
+    "UpdateUser clerkId=",
+    clerkId,
+    " user=",
+    user,
+    " user JSON=",
+    JSON.stringify(user)
+  );
+
   try {
     await connectToDatabase();
 
     const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
       new: true,
     });
+
+    console.log("updatedUser=", updatedUser);
 
     if (!updatedUser) throw new Error("User update failed");
 
