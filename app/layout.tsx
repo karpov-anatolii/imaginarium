@@ -23,6 +23,9 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{ variables: { colorPrimary: "#624cf5" } }}>
       <html lang="en">
+        <head>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+        </head>
         <body className={cn("font-IBMPlex antialiased", IBMPlex.variable)}>
           {children}
         </body>
