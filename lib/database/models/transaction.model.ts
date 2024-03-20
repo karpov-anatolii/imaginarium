@@ -5,7 +5,7 @@ const TransactionSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  stripeId: {
+  payPalId: {
     type: String,
     required: true,
     unique: true,

@@ -14,10 +14,10 @@ const Sidebar = () => {
       <div className="flex size-full flex-col gap-4">
         <Link href="/" className="sidebar-logo">
           <Image
-            src="/assets/images/logo-text.svg"
+            src="/assets/images/imaginarium_logo.png"
             alt="logo"
-            width={180}
-            height={28}
+            width={250}
+            height={70}
           />
         </Link>
 
@@ -39,8 +39,12 @@ const Sidebar = () => {
                       <Image
                         src={link.icon}
                         alt="logo"
-                        width={24}
-                        height={24}
+                        width={`${
+                          link.label === "Background Replacement" ? 48 : 24
+                        }`}
+                        height={`${
+                          link.label === "Background Replacement" ? 48 : 24
+                        }`}
                         className={`${isActive && "brightness-200"}`}
                       />
                       {link.label}

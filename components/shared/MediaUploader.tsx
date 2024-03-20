@@ -9,27 +9,33 @@ import Image from "next/image";
 type MediaUploaderProps = {
   onValueChange: (value: string) => void;
   setImage: React.Dispatch<any>;
-  publicId: string;
+  public_id: string;
   image: any;
   type: string;
+  preset?: string;
+  bg?: boolean;
 };
 
 const MediaUploader = ({
   onValueChange,
   setImage,
   image,
-  publicId,
+  public_id,
   type,
+  preset,
+  bg,
 }: MediaUploaderProps) => {
   const { toast } = useToast();
 
   const onUploadSuccessHandler = (result: any) => {
+    console.log("MediaUoloader onUploadSuccessHandler result=", result);
+
     setImage((prevState: any) => ({
       ...prevState,
-      publicId: result?.info?.public_id,
+      public_id: result?.info?.public_id,
       width: result?.info?.width,
       height: result?.info?.height,
-      secureURL: result?.info?.secure_url,
+      secure_url: result?.info?.secure_url,
     }));
 
     onValueChange(result?.info?.public_id);
@@ -53,7 +59,7 @@ const MediaUploader = ({
 
   return (
     <CldUploadWidget
-      uploadPreset="jsm_imaginarium"
+      uploadPreset={`${preset ?? "jsm_imaginarium"}`} // "jsm_imaginarium"
       options={{
         multiple: false,
         resourceType: "image",
@@ -63,19 +69,21 @@ const MediaUploader = ({
     >
       {({ open }) => (
         <div className="flex flex-col gap-4">
-          <h3 className="h3-bold text-dark-600">Original</h3>
+          <h3 className="h3-bold text-dark-600">{`${
+            bg ? "New Background" : "Original"
+          }`}</h3>
 
-          {publicId ? (
+          {public_id ? (
             <>
               <div className="cursor-pointer overflow-hidden rounded-[10px]">
                 <CldImage
                   width={getImageSize(type, image, "width")}
                   height={getImageSize(type, image, "height")}
-                  src={publicId}
+                  src={public_id}
                   alt="image"
                   sizes={"(max-width: 767px) 100vw, 50vw"}
                   placeholder={dataUrl as PlaceholderValue}
-                  className="media-uploader_cldImage"
+                  className="media-uploader_cldImage "
                 />
               </div>
             </>
@@ -89,7 +97,9 @@ const MediaUploader = ({
                   height={24}
                 />
               </div>
-              <p className="p-14-medium">Click here to upload image</p>
+              <p className="p-14-medium">
+                Click here to upload {`${bg ? "background" : "image"}`}{" "}
+              </p>
             </div>
           )}
         </div>

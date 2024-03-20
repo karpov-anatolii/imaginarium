@@ -7,17 +7,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
+import { useState } from "react";
 
 const MobileNav = () => {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="header">
       <Link href="/" className="flex items-center gap-2 md:py-2">
         <Image
-          src="/assets/images/logo-text.svg"
+          // src="/assets/images/logo-text.svg"
+          src="/assets/images/imaginarium_logo.png?v=2"
           alt="logo"
-          width={180}
-          height={28}
+          width={200}
+          height={30}
         />
       </Link>
 
@@ -25,7 +29,7 @@ const MobileNav = () => {
         <SignedIn>
           <UserButton afterSignOutUrl="/" />
 
-          <Sheet>
+          <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger>
               <Image
                 src="/assets/icons/menu.svg"
@@ -35,13 +39,13 @@ const MobileNav = () => {
                 className="cursor-pointer"
               />
             </SheetTrigger>
-            <SheetContent className="sheet-content sm:w-64">
+            <SheetContent className="sheet-content sm:w-[330px]">
               <>
                 <Image
-                  src="/assets/images/logo-text.svg"
+                  src="/assets/images/imaginarium_logo.png?v=2"
                   alt="logo"
-                  width={152}
-                  height={23}
+                  width={182}
+                  height={30}
                   className="cursor-pointer"
                 />
 
@@ -58,12 +62,17 @@ const MobileNav = () => {
                         <Link
                           href={link.route}
                           className="sidebar-link cursor-pointer"
+                          onClick={() => setOpen(false)}
                         >
                           <Image
                             src={link.icon}
                             alt="logo"
-                            width={24}
-                            height={24}
+                            width={`${
+                              link.label === "Background Replacement" ? 48 : 24
+                            }`}
+                            height={`${
+                              link.label === "Background Replacement" ? 48 : 24
+                            }`}
                           />
                           {link.label}
                         </Link>

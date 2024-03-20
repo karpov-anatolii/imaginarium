@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={{ variables: { colorPrimary: "#624cf5" } }}>
+    <ClerkProvider appearance={{ variables: { colorPrimary: "#294F6D" } }}>
       <html lang="en">
         <head>
           <link rel="icon" href="/favicon.ico" sizes="any" />

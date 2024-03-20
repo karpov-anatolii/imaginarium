@@ -21,16 +21,18 @@ declare type UpdateUserParams = {
 declare type AddImageParams = {
   image: {
     title: string;
-    publicId: string;
+    public_id: string;
     transformationType: string;
     width: number;
     height: number;
     config: any;
-    secureURL: string;
-    transformationURL: string;
+    secure_url: string;
+    transformationUrl: string;
     aspectRatio: string | undefined;
     prompt: string | undefined;
     color: string | undefined;
+    to: string | undefined;
+    from: string | undefined;
   };
   userId: string;
   path: string;
@@ -40,16 +42,18 @@ declare type UpdateImageParams = {
   image: {
     _id: string;
     title: string;
-    publicId: string;
+    public_id: string;
     transformationType: string;
     width: number;
     height: number;
     config: any;
-    secureURL: string;
-    transformationURL: string;
+    secure_url: string;
+    transformationUrl: string;
     aspectRatio: string | undefined;
     prompt: string | undefined;
     color: string | undefined;
+    to: string | undefined;
+    from: string | undefined;
   };
   userId: string;
   path: string;
@@ -62,6 +66,11 @@ declare type Transformations = {
     prompt: string;
     removeShadow?: boolean;
     multiple?: boolean;
+  };
+  replace?: {
+    from: string;
+    to: string;
+    preserveGeometry?: boolean;
   };
   recolor?: {
     prompt?: string;
@@ -80,7 +89,7 @@ declare type CheckoutTransactionParams = {
 };
 
 declare type CreateTransactionParams = {
-  stripeId: string;
+  payPalId: string;
   amount: number;
   credits: number;
   plan: string;
@@ -92,6 +101,7 @@ declare type TransformationTypeKey =
   | "restore"
   | "fill"
   | "remove"
+  | "replace"
   | "recolor"
   | "removeBackground";
 
@@ -129,6 +139,8 @@ declare type TransformationFormProps = {
 
 declare type TransformedImageProps = {
   image: any;
+  transparentImageObj?: any;
+  backgroundImageObj?: any;
   type: string;
   title: string;
   transformationConfig: Transformations | null;

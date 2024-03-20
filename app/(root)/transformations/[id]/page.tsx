@@ -5,14 +5,43 @@ import Link from "next/link";
 import Header from "@/components/shared/Header";
 import TransformedImage from "@/components/shared/TransformedImage";
 import { Button } from "@/components/ui/button";
-import { getImageById } from "@/lib/actions/image.actions";
+import { getImageById, resourceCld } from "@/lib/actions/image.actions";
 import { getImageSize } from "@/lib/utils";
 import { DeleteConfirmation } from "@/components/shared/DeleteConfirmation";
+import { redirect } from "next/navigation";
+import { getUserById } from "@/lib/actions/user.actions";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = auth();
 
+  const transformation = "restore";
+
+  if (!userId) redirect("/sign-in");
+
+  const user = await getUserById(userId);
+
   const image = await getImageById(id);
+
+  const transparentImageObj = await resourceCld(image.transparentPublicId);
+
+  const backgroundImageObj = await resourceCld(image.bgPublicId);
+  console.log("image on page=", image);
+
+  ///////////////////////////////////////////////////
+  const cloudinary = new Cloudinary({
+    cloud: {
+      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    },
+    url: {
+      secure: true,
+    },
+  });
+
+  // const mainImage =
+  //   uploadData && cloudinary.image(uploadData.public_id).toURL();
+  // const transparentImage =
+  //   transparentData && cloudinary.image(transparentData.public_id).toURL();
 
   return (
     <>
@@ -66,33 +95,112 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
             <Image
               width={getImageSize(image.transformationType, image, "width")}
               height={getImageSize(image.transformationType, image, "height")}
-              src={image.secureURL}
+              src={image.secure_url}
               alt="image"
               className="transformation-original_image"
             />
           </div>
 
-          {/* TRANSFORMED IMAGE */}
-          <TransformedImage
-            image={image}
-            type={image.transformationType}
-            title={image.title}
-            isTransforming={false}
-            transformationConfig={image.config}
-            hasDownload={true}
-          />
+          {image.transformationType === "removeBackground" ? (
+            // <>
+            //   <div className=" flex size-full flex-col gap-4">
+            //     <h3 className="h3-bold text-dark-600">Background removed</h3>
+            //     <div className="media-uploader_cta">
+            //       {transparentImageObj && (
+            //         <Image
+            //           src={transparentImageObj.secure_url}
+            //           width={400}
+            //           height={400}
+            //           className="w-full"
+            //           alt="remove.bg image"
+            //         />
+            //       )}
+            //     </div>
+            //   </div>
+
+            //   <div className="flex flex-col gap-4">
+            //     <h3 className="h3-bold text-dark-600">Background Image</h3>
+
+            //     <Image
+            //       width={getImageSize(image.transformationType, image, "width")}
+            //       height={getImageSize(
+            //         image.transformationType,
+            //         image,
+            //         "height"
+            //       )}
+            //       src={backgroundImageObj.secure_url}
+            //       alt="image"
+            //       className="transformation-original_image"
+            //     />
+            //   </div>
+
+            //   <div className="flex flex-col gap-4">
+            //     <h3 className="h3-bold text-dark-600">Final Image</h3>
+
+            //     <Image
+            //       width={getImageSize(image.transformationType, image, "width")}
+            //       height={getImageSize(
+            //         image.transformationType,
+            //         image,
+            //         "height"
+            //       )}
+            //       src={image.transformationUrl}
+            //       alt="image"
+            //       className="transformation-original_image"
+            //     />
+            //   </div>
+            // </>
+
+            <TransformedImage
+              image={image}
+              transparentImageObj={transparentImageObj}
+              backgroundImageObj={backgroundImageObj}
+              type={image.transformationType}
+              title={image.title}
+              isTransforming={false}
+              transformationConfig={image.config || { removeBackground: true }}
+              hasDownload={true}
+            />
+          ) : (
+            <TransformedImage
+              image={image}
+              type={image.transformationType}
+              title={image.title}
+              isTransforming={false}
+              transformationConfig={image.config}
+              hasDownload={true}
+            />
+          )}
         </div>
 
         {userId === image.author.clerkId && (
-          <div className="mt-4 space-y-4">
-            <Button asChild type="button" className="submit-button capitalize">
-              <Link href={`/transformations/${image._id}/update`}>
-                Update Image
-              </Link>
-            </Button>
+          <>
+            {/* //ADD Background ==========================
 
-            <DeleteConfirmation imageId={image._id} />
-          </div>
+            <BgForm
+              action="Add"
+              data={image}
+              userId={user._id}
+              type={transformation}
+              creditBalance={user.creditBalance}
+            /> */}
+            {/* //End add Background ==========================*/}
+            <div className="mt-4 space-y-4">
+              <Button
+                asChild
+                type="button"
+                className="submit-button capitalize "
+              >
+                <Link href={`/transformations/${image._id}/update`}>
+                  Update Image{" "}
+                  {image.transformationType === "removeBackground" &&
+                    "(Replace Background Image)"}
+                </Link>
+              </Button>
+
+              <DeleteConfirmation image={image} />
+            </div>
+          </>
         )}
       </section>
     </>

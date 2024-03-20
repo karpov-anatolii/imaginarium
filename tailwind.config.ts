@@ -26,14 +26,17 @@ module.exports = {
         purple: {
           100: "#F4F7FE",
           200: "#BCB6FF",
-          400: "#868CFF",
+          400: "#62a1bb",
           500: "#7857FF",
           600: "#4318FF",
         },
         dark: {
-          400: "#7986AC",
-          500: "#606C80",
-          600: "#2B3674",
+          100: "#c8d0db",
+          200: "#a1acbb",
+          300: "#75869d",
+          400: "#5d7189",
+          500: "#39558b",
+          600: "#063785",
           700: "#384262",
         },
         primary: {
@@ -70,7 +73,9 @@ module.exports = {
       },
       backgroundImage: {
         "purple-gradient": "url('/assets/images/gradient-bg.svg')",
-        banner: "url('/assets/images/banner-bg.png')",
+        "dark-gradient": "url('/assets/images/gradient-bg-dark.svg')",
+        "blue-gradient": "url('/assets/images/gradient-bg-blue.svg')",
+        banner: "url('/assets/images/universe2.png')",
       },
       borderRadius: {
         lg: "var(--radius)",

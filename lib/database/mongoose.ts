@@ -30,3 +30,9 @@ export const connectToDatabase = async () => {
 
   return cached.conn;
 };
+
+// Function to clear the cached connection
+export const clearDatabaseCache = () => {
+  cached.conn = null;
+  cached.promise = null;
+};

@@ -95,19 +95,32 @@ export const Collection = ({
 };
 
 const Card = ({ image }: { image: IImage }) => {
+  //console.log("Card image=", image);
+
   return (
     <li>
       <Link href={`/transformations/${image._id}`} className="collection-card">
-        <CldImage
-          src={image.publicId}
-          alt={image.title}
-          width={image.width}
-          height={image.height}
-          {...image.config}
-          loading="lazy"
-          className="h-52 w-full rounded-[10px] object-cover"
-          sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
-        />
+        {image.transformationType === "removeBackground" ? (
+          <Image
+            src={image.transformationUrl!}
+            width={300}
+            height={300}
+            alt={"image"}
+            className=" w-full rounded-[10px] object-contain"
+          />
+        ) : (
+          <CldImage
+            src={image.public_id}
+            alt={image.title}
+            width={image.width}
+            height={image.height}
+            {...image.config}
+            loading="lazy"
+            className=" w-full rounded-[10px] object-contain"
+            sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
+          />
+        )}
+
         <div className="flex-between">
           <p className="p-20-semibold mr-3 line-clamp-1 text-dark-600">
             {image.title}
@@ -119,8 +132,13 @@ const Card = ({ image }: { image: IImage }) => {
               ].icon
             }`}
             alt={image.title}
-            width={24}
-            height={24}
+            width={`${
+              image.transformationType === "removeBackground" ? 48 : 24
+            }`}
+            height={`${
+              image.transformationType === "removeBackground" ? 48 : 24
+            }`}
+            className="icon-svg"
           />
         </div>
       </Link>

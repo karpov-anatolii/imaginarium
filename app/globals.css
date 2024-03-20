@@ -14,6 +14,7 @@
     --popover-foreground: 222.2 84% 4.9%;
 
     --primary: 222.2 47.4% 11.2%;
+
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -84,7 +85,27 @@
 }
 
 .root-container {
-  @apply mt-16 flex-1 overflow-auto py-8 lg:mt-0 lg:max-h-screen lg:py-10;
+  @apply mt-28 lg:mt-4 flex-1 overflow-auto py-8  lg:max-h-screen lg:py-10;
+}
+
+.option label:nth-child(1) {
+  @apply text-dark-600 font-bold;
+}
+
+span.bg-primary {
+  @apply bg-purple-400;
+}
+
+span.border-primary {
+  @apply border-purple-400;
+}
+
+span.bg-secondary {
+  @apply bg-dark-200;
+}
+
+.options p {
+  @apply whitespace-nowrap p-16-medium text-dark-500;
 }
 
 /* ========================================== TAILWIND STYLES */
@@ -95,7 +116,7 @@
   }
 
   .gradient-text {
-    @apply bg-purple-gradient bg-cover bg-clip-text text-transparent;
+    @apply bg-blue-gradient bg-cover bg-clip-text text-transparent;
   }
 
   /* ===== ALIGNMENTS */
@@ -220,10 +241,11 @@
 
   /* Home Page */
   .home {
-    @apply sm:flex-center hidden h-72 flex-col gap-4 rounded-[20px] border bg-banner bg-cover bg-no-repeat p-10 shadow-inner;
+    @apply sm:flex-center hidden h-72 flex-col gap-4 rounded-[20px] border bg-banner bg-cover bg-no-repeat bg-center p-10 shadow-inner;
   }
 
   .home-heading {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     @apply h1-semibold max-w-[500px] flex-wrap text-center text-white shadow-sm;
   }
 
@@ -285,11 +307,11 @@
 
   /* MediaUploader Component */
   .media-uploader_cldImage {
-    @apply h-fit min-h-72 w-full rounded-[10px] border border-dashed bg-purple-100/20 object-cover p-2;
+    @apply h-fit min-h-72 w-full rounded-[10px] border border-dashed bg-purple-100/20 object-contain p-2;
   }
 
   .media-uploader_cta {
-    @apply flex-center flex h-72 cursor-pointer flex-col gap-5 rounded-[16px] border border-dashed bg-purple-100/20 shadow-inner;
+    @apply flex-center flex min-h-72 cursor-pointer flex-col gap-5 rounded-[16px] border border-dashed bg-purple-100/20 shadow-inner;
   }
 
   .media-uploader_cta-image {
@@ -298,7 +320,7 @@
 
   /* Navbar Component */
   .header {
-    @apply flex-between fixed h-16 w-full border-b-4 border-purple-100 bg-white p-5 lg:hidden;
+    @apply flex-between fixed h-28 w-full z-50 border-b-4 border-purple-100 bg-white p-8 lg:hidden;
   }
 
   .header-nav_elements {
@@ -312,11 +334,11 @@
 
   /* Sidebar Component */
   .sidebar {
-    @apply hidden h-screen w-72 bg-white p-5 shadow-md shadow-purple-200/50 lg:flex;
+    @apply hidden min-h-screen w-80 bg-white p-5 shadow-md shadow-purple-200/50 lg:flex;
   }
 
   .sidebar-logo {
-    @apply flex items-center gap-2 md:py-2;
+    @apply flex-center gap-2 md:py-2;
   }
 
   .sidebar-nav {
@@ -337,7 +359,7 @@
 
   /* TransformationForm Component */
   .prompt-field {
-    @apply flex flex-col gap-5 lg:flex-row lg:gap-10;
+    @apply flex flex-col gap-5  lg:gap-10;
   }
 
   .media-uploader-field {
@@ -350,7 +372,7 @@
   }
 
   .transformed-image {
-    @apply h-fit min-h-72 w-full rounded-[10px] border border-dashed bg-purple-100/20 object-cover p-2;
+    @apply h-fit  w-full rounded-[10px] border border-dashed bg-purple-100/20 object-cover p-2;
   }
 
   .transforming-loader {
@@ -359,6 +381,47 @@
 
   .transformed-placeholder {
     @apply flex-center p-14-medium h-full min-h-72 flex-col gap-5 rounded-[16px] border border-dashed bg-purple-100/20 shadow-inner;
+  }
+
+  /* Footer */
+
+  footer {
+    @apply text-white py-[70px] relative bg-dark-gradient bg-cover overflow-hidden;
+  }
+
+  footer .logo-div {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.3;
+  }
+
+  footer ul {
+    @apply flex flex-wrap flex-between max-lg:flex-col  gap-3 text-nowrap text-dark-200 hover:text-white list-none pl-[20px];
+  }
+
+  footer .links-container {
+    @apply flex flex-col gap-4;
+  }
+
+  footer .copyright {
+    @apply mt-[36px] text-dark-200;
+  }
+
+  footer h3 {
+    @apply text-white max-lg:hidden;
+  }
+
+  footer a {
+    @apply text-dark-200;
+  }
+
+  footer li {
+    @apply my-4;
   }
 }
 
@@ -373,4 +436,12 @@
   font-size: 16px;
   font-weight: 600;
   color: #384262;
+}
+
+.text-gray-700 {
+  color: #182c4c;
+}
+
+.bg-destructive {
+  background-color: #ef44bc;
 }

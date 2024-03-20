@@ -13,8 +13,8 @@ const Home = async ({ searchParams }: SearchParamProps) => {
   return (
     <>
       <section className="home">
-        <h1 className="home-heading">
-          Unleash Your Creative Vision with Imaginarium
+        <h1 className="home-heading ">
+          Dive into the unexplored world of IMAGINARIUM
         </h1>
         <ul className="flex-center w-full gap-20">
           {navLinks.slice(1, 5).map((link) => (
@@ -24,7 +24,14 @@ const Home = async ({ searchParams }: SearchParamProps) => {
               className="flex-center flex-col gap-2"
             >
               <li className="flex-center w-fit rounded-full bg-white p-4">
-                <Image src={link.icon} alt="image" width={24} height={24} />
+                <Image
+                  src={link.icon}
+                  alt="image"
+                  width={`${link.label === "Background Replacement" ? 48 : 24}`}
+                  height={`${
+                    link.label === "Background Replacement" ? 48 : 24
+                  }`}
+                />
               </li>
               <p className="p-14-medium text-center text-white">{link.label}</p>
             </Link>
