@@ -72,7 +72,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply flex flex-col justify-between bg-background text-foreground min-h-screen;
   }
 }
 
@@ -81,11 +81,11 @@
 }
 
 .root {
-  @apply flex min-h-screen w-full flex-col bg-white lg:flex-row;
+  @apply flex  w-full flex-col bg-white lg:flex-row;
 }
 
 .root-container {
-  @apply mt-28 lg:mt-4 flex-1 overflow-auto py-8  lg:max-h-screen lg:py-10;
+  @apply mt-28 lg:mt-4 flex-1 overflow-auto py-8  lg:py-10;
 }
 
 .option label:nth-child(1) {
@@ -334,7 +334,7 @@ span.bg-secondary {
 
   /* Sidebar Component */
   .sidebar {
-    @apply hidden min-h-screen w-80 bg-white p-5 shadow-md shadow-purple-200/50 lg:flex;
+    @apply hidden  w-80 bg-white p-5 shadow-md shadow-purple-200/50 lg:flex;
   }
 
   .sidebar-logo {
@@ -386,7 +386,7 @@ span.bg-secondary {
   /* Footer */
 
   footer {
-    @apply text-white py-[70px] relative bg-dark-gradient bg-cover overflow-hidden;
+    @apply order-last text-white py-[70px] relative bg-dark-gradient bg-cover overflow-hidden;
   }
 
   footer .logo-div {
