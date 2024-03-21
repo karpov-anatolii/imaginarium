@@ -1,10 +1,13 @@
 "use client";
 
 import { useToast } from "@/components/ui/use-toast";
+import { updateCredits } from "@/lib/actions/user.actions";
 import { dataUrl, getImageSize } from "@/lib/utils";
 import { CldImage, CldUploadWidget } from "next-cloudinary";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+import { title } from "process";
+import { useTransition } from "react";
 
 type MediaUploaderProps = {
   onValueChange: (value: string) => void;
@@ -14,6 +17,7 @@ type MediaUploaderProps = {
   type: string;
   preset?: string;
   bg?: boolean;
+  userId?: string;
 };
 
 const MediaUploader = ({
@@ -24,12 +28,12 @@ const MediaUploader = ({
   type,
   preset,
   bg,
+  userId,
 }: MediaUploaderProps) => {
   const { toast } = useToast();
+  const [isPending, startTransition] = useTransition();
 
   const onUploadSuccessHandler = (result: any) => {
-    console.log("MediaUoloader onUploadSuccessHandler result=", result);
-
     setImage((prevState: any) => ({
       ...prevState,
       public_id: result?.info?.public_id,
@@ -39,13 +43,21 @@ const MediaUploader = ({
     }));
 
     onValueChange(result?.info?.public_id);
+    if (!bg && userId) {
+      const creditFee = type === "removeBackground" ? -5 : -1;
+      startTransition(async () => {
+        await updateCredits(userId, creditFee);
+      });
 
-    toast({
-      title: "Image uploaded successfully",
-      description: "1 credit was deducted from your account",
-      duration: 5000,
-      className: "success-toast",
-    });
+      toast({
+        title: "Image uploaded successfully",
+        description: `${
+          type === "removeBackground" ? "5 credits " : "1 credit "
+        }  was deducted from your account`,
+        duration: 5000,
+        className: "success-toast",
+      });
+    }
   };
 
   const onUploadErrorHandler = () => {

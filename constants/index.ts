@@ -48,23 +48,19 @@ export const plans = [
     name: "Free",
     icon: "/assets/icons/free-plan.svg",
     price: 0,
-    credits: 19,
+    credits: 9,
     inclusions: [
       {
-        label: "20 Free Credits",
+        label: "9 Free Credits",
         isIncluded: true,
       },
       {
-        label: "Basic Access to Services",
+        label: "1 Background Replacement",
         isIncluded: true,
       },
       {
-        label: "Priority Customer Support",
-        isIncluded: false,
-      },
-      {
-        label: "Priority Updates",
-        isIncluded: false,
+        label: "+ 4 Other Operations",
+        isIncluded: true,
       },
     ],
   },
@@ -72,24 +68,20 @@ export const plans = [
     _id: 2,
     name: "Pro Package",
     icon: "/assets/icons/free-plan.svg",
-    price: 1,
-    credits: 10,
+    price: 10,
+    credits: 50,
     inclusions: [
       {
-        label: "120 Credits",
+        label: "50 Credits",
         isIncluded: true,
       },
       {
-        label: "Full Access to Services",
+        label: "10 Background Replacement",
         isIncluded: true,
       },
       {
-        label: "Priority Customer Support",
+        label: "Or 50 Other Operations",
         isIncluded: true,
-      },
-      {
-        label: "Priority Updates",
-        isIncluded: false,
       },
     ],
   },
@@ -97,23 +89,19 @@ export const plans = [
     _id: 3,
     name: "Premium Package",
     icon: "/assets/icons/free-plan.svg",
-    price: 2,
-    credits: 70,
+    price: 20,
+    credits: 125,
     inclusions: [
       {
-        label: "2000 Credits",
+        label: "125 Credits",
         isIncluded: true,
       },
       {
-        label: "Full Access to Services",
+        label: "25 Background Replacement",
         isIncluded: true,
       },
       {
-        label: "Priority Customer Support",
-        isIncluded: true,
-      },
-      {
-        label: "Priority Updates",
+        label: "Or 125 Other Operations",
         isIncluded: true,
       },
     ],

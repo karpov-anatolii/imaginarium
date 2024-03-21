@@ -6,8 +6,8 @@ import Header from "@/components/shared/Header";
 import { Button } from "@/components/ui/button";
 import { plans } from "@/constants";
 import { getUserById } from "@/lib/actions/user.actions";
-import Checkout from "@/components/shared/Checkout";
 import PayPalButton from "@/components/shared/PayPalButton";
+import { useEffect } from "react";
 const Credits = async () => {
   const { userId } = auth();
 
@@ -19,7 +19,7 @@ const Credits = async () => {
     <>
       <Header
         title="Buy Credits"
-        subtitle="Choose a credit package that suits your needs!"
+        subtitle="Note: As PayPal doesn't work in Ukraine in business mode, we can only process your purchase if you contact us via email at <span class='p-18-semibold'>schodya@gmail.com </span>. Please indicate which plan you prefer to buy, and we will send you the payment credentials."
       />
 
       <section>
@@ -28,9 +28,7 @@ const Credits = async () => {
             <li key={plan.name} className="credits-item">
               <div className="flex-center flex-col gap-3">
                 <Image src={plan.icon} alt="check" width={50} height={50} />
-                <p className="p-20-semibold mt-2 text-purple-500">
-                  {plan.name}
-                </p>
+                <p className="p-20-semibold mt-2 text-dark-600">{plan.name}</p>
                 <p className="h1-semibold text-dark-600">${plan.price}</p>
                 <p className="p-16-regular">{plan.credits} Credits</p>
               </div>

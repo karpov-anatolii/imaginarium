@@ -75,7 +75,7 @@ module.exports = {
         "purple-gradient": "url('/assets/images/gradient-bg.svg')",
         "dark-gradient": "url('/assets/images/gradient-bg-dark.svg')",
         "blue-gradient": "url('/assets/images/gradient-bg-blue.svg')",
-        banner: "url('/assets/images/universe2.png')",
+        banner: "url('/assets/images/universe3.png')",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -50,7 +50,6 @@ const PayPalButton = ({ plan, amount, credits, buyerId }) => {
               purchase_units,
             } = details; //"COMPLETED"
             const value = purchase_units[0].amount.value;
-            console.log("details=", details, "value=", value);
             if (status === "COMPLETED" && Number(value) == Number(amount)) {
               const res = await createTransaction({
                 payPalId,
@@ -91,56 +90,7 @@ const PayPalButton = ({ plan, amount, credits, buyerId }) => {
   }, []);
 
   return (
-    // <div>
-    //   <PayPalScriptProvider
-    //     options={{
-    //       clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-    //       "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-    //       currency: "USD",
-    //       intent: "capture",
-    //     }}
-    //   >
-    //     <PayPalButtons
-    //       style={{
-    //         color: "gold",
-    //         shape: "rect",
-    //         label: "pay",
-    //         height: 50,
-    //       }}
-    //       createOrder={async () => {
-    //         console.log("START createOrder");
-    //         const res = await fetch("/api/paypal/createorder", {
-    //           method: "POST",
-    //           body: JSON.stringify({
-    //             user_id: user._id,
-    //             // order_price: amountRef.current.value,
-    //             order_price: 100,
-    //           }),
-    //         });
-    //         console.log("createOrder res=", res);
-    //         const resJson = await res.json();
-    //         console.log(
-    //           "CreateOrder : resJson.data.response.order_id=",
-    //           resJson.data.response.order_id
-    //         );
-    //         return resJson.data.response.order_id + "";
-    //       }}
-    //       onApprove={async (data, actions) => {
-    //         console.log("START onApprove, data.orderID=", data.orderID);
-    //         const response = await fetch("/api/paypal/cuptureorder", {
-    //           method: "POST",
-    //           body: JSON.stringify({
-    //             orderID: data.orderID,
-    //           }),
-    //         });
-    //         const respondJson = await response.json();
-
-    //         console.log("onApprove : respondJson=", respondJson);
-    //         if (respondJson) return true;
-    //       }}
-    //     />
-    //   </PayPalScriptProvider>
-    // </div>
+    
     <div>
       <div ref={paypal}></div>
     </div>

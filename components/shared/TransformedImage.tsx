@@ -36,7 +36,6 @@ const TransformedImage = ({
       title
     );
   };
-  console.log("image.transformationType=", type);
 
   return (
     <>

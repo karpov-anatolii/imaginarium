@@ -26,7 +26,6 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
   const transparentImageObj = await resourceCld(image.transparentPublicId);
 
   const backgroundImageObj = await resourceCld(image.bgPublicId);
-  console.log("image on page=", image);
 
   ///////////////////////////////////////////////////
   const cloudinary = new Cloudinary({

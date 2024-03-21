@@ -33,19 +33,17 @@ const populateUser = (query: any) =>
 export async function addImage({ image, userId, path }: AddImageParams) {
   try {
     await connectToDatabase();
-    //  clearDatabaseCache(); // clear cache mongodb if new fields are added to schema
+    // clearDatabaseCache(); // clear cache mongodb if new fields are added to schema
     const author = await User.findById(userId);
 
     if (!author) {
       throw new Error("User not found");
     }
-    console.log("addImage before  image=", image);
 
     const newImage = await Image.create({
       ...image,
       author: author._id,
     });
-    console.log("addImage after newImage=", newImage);
     revalidatePath(path);
 
     return JSON.parse(JSON.stringify(newImage));
@@ -205,10 +203,8 @@ export async function getUserImages({
 
 export async function uploadToCld(filename: string) {
   try {
-    console.log("file=", filename);
     const filePath = path.join(process.cwd(), "public/images/" + filename);
     const results = await cloudinary.uploader.upload(filePath);
-    console.log("results=", results);
 
     return JSON.parse(JSON.stringify(results));
   } catch (error) {
@@ -220,7 +216,6 @@ export async function uploadToCld(filename: string) {
 export async function resourceCld(public_id: string) {
   try {
     const results = await cloudinary.api.resource(public_id);
-    console.log("resourceCld results=", results);
 
     return JSON.parse(JSON.stringify(results));
   } catch (error) {
@@ -246,7 +241,6 @@ export async function removeBgApi(url: string) {
     const formData = new FormData();
     formData.append("size", "auto");
     formData.append("image_url", url);
-    console.log("removeBgApi url=", url);
     const filename = "removebg_" + Date.now() + ".png";
 
     await axios({
@@ -261,8 +255,6 @@ export async function removeBgApi(url: string) {
       encoding: null,
     })
       .then((response: any) => {
-        console.log("response data=", response.data);
-
         if (response.status != 200)
           return console.error("Error:", response.status, response.statusText);
 
@@ -270,13 +262,10 @@ export async function removeBgApi(url: string) {
           path.join(process.cwd(), "public/images/" + filename),
           response.data
         );
-        console.log("filename1=", filename);
       })
       .catch((error: any) => {
         return console.error("Request failed:", error);
       });
-
-    console.log("filename2=", JSON.parse(JSON.stringify({ filename })));
 
     return JSON.parse(JSON.stringify({ filename }));
   } catch (error) {
@@ -290,7 +279,6 @@ export async function removeBgApiSaveToCld(url: string) {
     const formData = new FormData();
     formData.append("size", "auto");
     formData.append("image_url", url);
-    console.log("removeBgApi url=", url);
 
     const response = await axios({
       method: "post",
@@ -304,30 +292,14 @@ export async function removeBgApiSaveToCld(url: string) {
       encoding: null,
     });
 
-    console.log("response =", response);
-
     if (response.status != 200)
       return console.error("Error:", response.status, response.statusText);
 
-    // console.log(
-    //   "response.data.toString('base64') =",
-    //   response.data.toString("base64")
-    // );
-
-    // const base64String = response.data.toString("base64");
-
-    // // Записать строку в файл
-    // fs.writeFileSync(
-    //   path.join(process.cwd(), "public/images/" + "buffer.txt"),
-    //   base64String,
-    //   "base64"
-    // );
     const base64String = response.data.toString("base64");
     const dataURI = `data:image/png;base64,${base64String}`;
     const result = await cloudinary.uploader.upload(dataURI, {
       resource_type: "image",
     });
-    console.log("result cloudinary.uploader.upload =", result);
     return result;
   } catch (error) {
     console.log(error);

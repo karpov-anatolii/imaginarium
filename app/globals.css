@@ -259,7 +259,7 @@ span.bg-secondary {
   }
 
   .credits-btn {
-    @apply w-full rounded-full bg-purple-100 bg-cover text-purple-500 hover:text-purple-500;
+    @apply w-full rounded-full bg-purple-100 bg-cover text-dark-300 hover:text-dark-500;
   }
 
   /* Profile Page */

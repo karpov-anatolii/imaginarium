@@ -39,7 +39,6 @@ export async function checkoutCredits(transaction: CheckoutTransactionParams) {
 }
 
 export async function createTransaction(transaction: CreateTransactionParams) {
-  console.log("transaction=", transaction);
   try {
     await connectToDatabase();
 
