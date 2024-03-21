@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { plans } from "@/constants";
 import { getUserById } from "@/lib/actions/user.actions";
 import PayPalButton from "@/components/shared/PayPalButton";
-import { useEffect } from "react";
+
 const Credits = async () => {
   const { userId } = auth();
 

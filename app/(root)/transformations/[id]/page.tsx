@@ -10,7 +10,6 @@ import { getImageSize } from "@/lib/utils";
 import { DeleteConfirmation } from "@/components/shared/DeleteConfirmation";
 import { redirect } from "next/navigation";
 import { getUserById } from "@/lib/actions/user.actions";
-import { Cloudinary } from "@cloudinary/url-gen";
 
 const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = auth();
@@ -26,21 +25,6 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
   const transparentImageObj = await resourceCld(image.transparentPublicId);
 
   const backgroundImageObj = await resourceCld(image.bgPublicId);
-
-  ///////////////////////////////////////////////////
-  const cloudinary = new Cloudinary({
-    cloud: {
-      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-    },
-    url: {
-      secure: true,
-    },
-  });
-
-  // const mainImage =
-  //   uploadData && cloudinary.image(uploadData.public_id).toURL();
-  // const transparentImage =
-  //   transparentData && cloudinary.image(transparentData.public_id).toURL();
 
   return (
     <>
