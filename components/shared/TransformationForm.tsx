@@ -524,7 +524,6 @@ const TransformationForm = ({
                   onCheckedChange={() => {
                     setReplaceMode(!replaceMode);
                     setTransformationConfig(null);
-
                   }}
                 />
                 <Label htmlFor="replace-mode">Add replacement object</Label>
@@ -555,6 +554,8 @@ const TransformationForm = ({
             )}
           </div>
         )}
+
+        {/* ======== ORIGIN IMAGE Cloudinary===========  */}
 
         <div className="media-uploader-field">
           <CustomField
@@ -741,7 +742,7 @@ const TransformationForm = ({
                 <Button
                   type="button"
                   className="submit-button capitalize"
-                  // disabled={isTransforming || newTransformation === null}
+                  disabled={isTransforming || newTransformation === null}
                   onClick={optionHandler}
                 >
                   {isTransforming ? "Transforming..." : " Apply Options"}

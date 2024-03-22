@@ -39,7 +39,7 @@ const MobileNav = () => {
                 className="cursor-pointer"
               />
             </SheetTrigger>
-            <SheetContent className="sheet-content sm:w-[330px]">
+            <SheetContent className="sheet-content w-full overflow-scroll sm:w-[330px]">
               <>
                 <Image
                   src="/assets/images/imaginarium_logo.png?v=2"

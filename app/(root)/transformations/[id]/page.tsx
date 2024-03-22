@@ -85,55 +85,6 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
           </div>
 
           {image.transformationType === "removeBackground" ? (
-            // <>
-            //   <div className=" flex size-full flex-col gap-4">
-            //     <h3 className="h3-bold text-dark-600">Background removed</h3>
-            //     <div className="media-uploader_cta">
-            //       {transparentImageObj && (
-            //         <Image
-            //           src={transparentImageObj.secure_url}
-            //           width={400}
-            //           height={400}
-            //           className="w-full"
-            //           alt="remove.bg image"
-            //         />
-            //       )}
-            //     </div>
-            //   </div>
-
-            //   <div className="flex flex-col gap-4">
-            //     <h3 className="h3-bold text-dark-600">Background Image</h3>
-
-            //     <Image
-            //       width={getImageSize(image.transformationType, image, "width")}
-            //       height={getImageSize(
-            //         image.transformationType,
-            //         image,
-            //         "height"
-            //       )}
-            //       src={backgroundImageObj.secure_url}
-            //       alt="image"
-            //       className="transformation-original_image"
-            //     />
-            //   </div>
-
-            //   <div className="flex flex-col gap-4">
-            //     <h3 className="h3-bold text-dark-600">Final Image</h3>
-
-            //     <Image
-            //       width={getImageSize(image.transformationType, image, "width")}
-            //       height={getImageSize(
-            //         image.transformationType,
-            //         image,
-            //         "height"
-            //       )}
-            //       src={image.transformationUrl}
-            //       alt="image"
-            //       className="transformation-original_image"
-            //     />
-            //   </div>
-            // </>
-
             <TransformedImage
               image={image}
               transparentImageObj={transparentImageObj}
@@ -158,15 +109,6 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
 
         {userId === image.author.clerkId && (
           <>
-            {/* //ADD Background ==========================
-
-            <BgForm
-              action="Add"
-              data={image}
-              userId={user._id}
-              type={transformation}
-              creditBalance={user.creditBalance}
-            /> */}
             {/* //End add Background ==========================*/}
             <div className="mt-4 space-y-4">
               <Button
@@ -175,7 +117,7 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
                 className="submit-button capitalize "
               >
                 <Link href={`/transformations/${image._id}/update`}>
-                  Update Image{" "}
+                  Update{" "}
                   {image.transformationType === "removeBackground" &&
                     "(Replace Background Image)"}
                 </Link>

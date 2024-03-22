@@ -112,7 +112,8 @@ export const transformationTypes = {
   restore: {
     type: "restore",
     title: "Restore Image",
-    subTitle: "Refine images by removing noise and imperfections",
+    subTitle:
+      "Refine images by removing noise and imperfections. Price - 1 credit.",
     config: { restore: true, improve: "100" },
     icon: "image.svg",
   },
@@ -120,21 +121,22 @@ export const transformationTypes = {
     type: "removeBackground",
     title: "Background Replacement",
     subTitle:
-      "Removes the background of the image using AI and merges it with the new background",
+      "Removes the background of the image using AI and merges it with the new background. Price - 5 credits.",
     config: { removeBackground: true },
     icon: "replace_bg.svg",
   },
   fill: {
     type: "fill",
     title: "Generative Fill",
-    subTitle: "Enhance an image's dimensions using AI outpainting",
+    subTitle:
+      "Enhance an image's dimensions using AI outpainting. Price - 1 credit.",
     config: { fillBackground: true },
     icon: "stars.svg",
   },
   remove: {
     type: "remove",
     title: "Object Remove",
-    subTitle: "Identify and eliminate objects from images",
+    subTitle: "Identify and eliminate objects from images. Price - 1 credit.",
     config: {
       remove: { prompt: "", removeShadow: true, multiple: true },
     },
@@ -144,7 +146,7 @@ export const transformationTypes = {
     type: "replace",
     title: "Object replace",
     subTitle:
-      "Identify and eliminate objects from images and replace them with new objects",
+      "Identify and eliminate objects from images and replace them with new objects. Price - 1 credit.",
     config: {
       replace: { from: "", to: "", preserveGeometry: true },
     },
@@ -153,7 +155,7 @@ export const transformationTypes = {
   recolor: {
     type: "recolor",
     title: "Object Recolor",
-    subTitle: "Identify and recolor objects from the image",
+    subTitle: "Identify and recolor objects from the image. Price - 1 credit.",
     config: {
       recolor: { prompt: "", to: "", multiple: true },
     },
