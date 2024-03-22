@@ -12,7 +12,7 @@ export async function POST(req: Request, res: Response) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
   const payload = await req.json();
   const body = JSON.stringify(payload);
-  return NextResponse.json({ message: "OK", user: body });
+  return NextResponse.json({ message: "ITS OK", user: body });
   // return new Response("FUCK YOU!", {
   //   status: 200,
   // });
