@@ -84,6 +84,7 @@ const TransformationForm = ({
   creditBalance,
   config = null,
 }: TransformationFormProps) => {
+  if( type === "removeBackground") creditFee*=5;
   const transformationType = transformationTypes[type];
   const [image, setImage] = useState(data); //   public_id  width height secure_url
   const [bgImageCldObj, setBgImageCldObj] = useState<{
