@@ -84,7 +84,8 @@ const TransformationForm = ({
   creditBalance,
   config = null,
 }: TransformationFormProps) => {
-  if( type === "removeBackground") creditFee*=5;
+  let modifiedCreditFee = creditFee;
+  if (type === "removeBackground") modifiedCreditFee *= 5;
   const transformationType = transformationTypes[type];
   const [image, setImage] = useState(data); //   public_id  width height secure_url
   const [bgImageCldObj, setBgImageCldObj] = useState<{
@@ -432,7 +433,9 @@ const TransformationForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        {creditBalance < Math.abs(creditFee) && <InsufficientCreditsModal />}
+        {creditBalance < Math.abs(modifiedCreditFee) && (
+          <InsufficientCreditsModal />
+        )}
         <CustomField
           control={form.control}
           name="title"
