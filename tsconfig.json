@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/(root)/credits/page.tsx",
-    "components/shared/PayPalButton.jsx"
+    "components/shared/PayPalButton.jsx",
+    "app/loading.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -19,7 +19,7 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
   if (!userId) redirect("/sign-in");
 
   const user = await getUserById(userId);
-
+  
   const image = await getImageById(id);
 
   const transparentImageObj = await resourceCld(image.transparentPublicId);

@@ -3,6 +3,8 @@ import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const IBMPlex = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -27,7 +29,7 @@ export default function RootLayout({
           <link rel="icon" href="/favicon.ico" sizes="any" />
         </head>
         <body className={cn("font-IBMPlex antialiased", IBMPlex.variable)}>
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </body>
       </html>
     </ClerkProvider>
