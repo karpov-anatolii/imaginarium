@@ -58,6 +58,10 @@ const MediaUploader = ({
         className: "success-toast",
       });
     }
+
+    setTimeout(() => {
+      document.body.style.overflow = "auto";
+    }, 5000);
   };
 
   const onUploadErrorHandler = () => {
