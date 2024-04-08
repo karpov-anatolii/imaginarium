@@ -14,12 +14,8 @@ import { getUserById } from "@/lib/actions/user.actions";
 const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = auth();
 
-  const transformation = "restore";
-
   if (!userId) redirect("/sign-in");
 
-  const user = await getUserById(userId);
-  
   const image = await getImageById(id);
 
   const transparentImageObj = await resourceCld(image.transparentPublicId);
